@@ -15,7 +15,7 @@ export default function Radio({ name, label, options, className }: Props) {
       <Label name={name}>{label}</Label>
       <RadioGroup.Root name={name} value={value} className='grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4' onValueChange={onChange}>
         {options.map(({ value, label }) => (
-          <RadioGroup.Item key={value} value={value} className='rounded-lg bg-white py-4 text-center text-sm shadow-heavy rdx-state-checked:bg-gold rdx-state-checked:text-white rdx-state-checked:shadow-none'>
+          <RadioGroup.Item key={value} value={value} className=''>
             {label}
           </RadioGroup.Item>
         ))}

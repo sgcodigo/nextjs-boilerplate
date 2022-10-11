@@ -12,7 +12,7 @@ export default function Input({ name, label, className }: Props) {
       <Label name={name} size='sm'>
         {label}
       </Label>
-      <input name={name} value={value} className='w-full rounded-[4px] border p-4 text-sm outline-none' onChange={e => onChange(e.target.value)} />
+      <input name={name} value={value} className='outline-none' onChange={e => onChange(e.target.value)} />
     </fieldset>
   )
 }
