@@ -4,7 +4,6 @@ import AppRoot from 'layouts/AppRoot'
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
 import 'styles/globals.css'
-import 'styles/keyframes.css'
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { keepPreviousData: true } } })
 

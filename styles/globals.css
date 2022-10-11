@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --s: 1;
   --o: 0;
   --x: 0;
   --y: 0;
-  --w: none;
-  --h: none;
-  /* font-size: 62.5%; */
+  --t: 0.25s;
+  --header: 84px;
 }
-/* 
-body {
-  @apply text-[1.4rem];
-} */
+
+* {
+  @apply flex-shrink-0;
+}
+
+.visible-hide {
+  visibility: hidden;
+}

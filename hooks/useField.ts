@@ -1,14 +1,14 @@
 import { useController } from 'react-hook-form'
 
-export default function useField(name: string) {
+type Option = { $default?: any }
+
+export default function useField<TValue = string>(name: string, { $default = '' }: Option = {}) {
   const {
     field: { ref, value, onChange },
     fieldState: { error },
-  } = useController({ name })
+  } = useController({ name, defaultValue: $default })
 
-  const handleChange = (value: any) => {
-    onChange(value)
-  }
+  const val: TValue = value
 
-  return { ref, value, error: error?.message, onChange: handleChange }
+  return { ref, value: val, error: error?.message, onChange }
 }
