@@ -1,62 +1,62 @@
-import classNames from 'classnames'
-import Spinner from 'components/Spinner'
-import Link from 'next/link'
-import { ButtonHTMLAttributes, ReactNode } from 'react'
-import { ElementState } from 'types'
-import { cssvars } from 'utils'
+import classNames from 'classnames';
+import Spinner from 'components/Spinner';
+import Link from 'next/link';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ElementSize, ElementState } from 'types';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  $ref?: any
-  href?: string
-  icon?: ReactNode
-  color?: string
-  label?: ReactNode
-  state?: ElementState
-  inline?: boolean
-  variant?: 'text' | 'primary' | 'secondary' | 'transparent'
-}
+  $ref?: any;
+  size?: ElementSize;
+  href?: string;
+  icon?: ReactNode;
+  label?: ReactNode;
+  state?: ElementState;
+  inline?: boolean;
+  variant?: 'text' | 'primary' | 'secondary' | 'transparent';
+};
 
 const Button = ({
   $ref,
-  icon,
   href,
-  color,
+  size = 'md',
+  icon,
   label,
   state = '',
-  inline = true,
   variant = 'primary',
   className,
-  onClick,
   ...rest
 }: Props) => {
   const props = {
-    style: cssvars({ color }),
     className: classNames(
-      'rounded-full text-white font-bold flex justify-center items-center border border-trans bg-primary',
-      { 'text-xs px-5 h-7': inline },
-      { 'text-sm px-8 h-16': !inline }
+      'uppercase flex justify-center items-center leading-none border',
+      { 'text-xs px-4 h-9': size === 'sm' },
+      { 'text-sm px-8 h-[3.25rem]': size === 'md' },
+      { 'border-grey-darker': variant === 'secondary' },
+      { 'text-white border-primary bg-primary font-bold': variant === 'primary' },
+      { '!bg-inactive !border-inactive': state === 'disable' },
+      className,
     ),
-  }
+  };
 
   const child =
     state === 'loading' ? (
-      <Spinner color='currentColor' />
+      <Spinner color="currentColor" />
     ) : (
       <>
         {icon}
-        {!!label && <span className=''>{label}</span>}
+        {<span>{label}</span>}
       </>
-    )
+    );
 
   return !!href ? (
     <Link ref={$ref} href={href} {...props}>
       {child}
     </Link>
   ) : (
-    <button ref={$ref} onClick={e => state === '' && !!onClick && onClick(e)} {...rest} {...props}>
+    <button ref={$ref} disabled={state === 'disable' || state === 'loading'} {...rest} {...props}>
       {child}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

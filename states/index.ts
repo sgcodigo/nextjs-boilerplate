@@ -1,12 +1,9 @@
-import { atom } from 'recoil'
-import { recoilPersist } from 'recoil-persist'
+import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+import { Popup } from '../types';
 
-const { persistAtom } = recoilPersist()
+const { persistAtom } = recoilPersist();
 
-// const persistAtomEffect: AtomEffect<any> = param => {
-//   param.getPromise(isClientSideState).then(() => persistAtom(param))
-// }
+export const popupState = atom<Popup>({ key: 'POPUP', default: {} });
 
-// export const isClientSideState = atom<boolean>({ key: 'client-side', default: false })
-
-export const tokenState = atom<string>({ key: 'TOKEN', default: '', effects_UNSTABLE: [persistAtom] })
+export const tokenState = atom<string>({ key: 'TOKEN', default: '', effects_UNSTABLE: [persistAtom] });
