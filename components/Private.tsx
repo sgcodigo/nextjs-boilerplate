@@ -10,3 +10,4 @@ export default function Private({ children, ...rest }: Props) {
 }
 
 // Note: All private routes must be wrapped with Private.
+// If not, hydration error will happen with hooks/useQuery
