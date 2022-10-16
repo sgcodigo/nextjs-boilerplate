@@ -5,7 +5,7 @@ import { FormProvider, useForm, UseFormReturn, UseFormSetValue } from 'react-hoo
 import type { Request, Response, ResponseError } from 'types/api'
 import { AnyObjectSchema, object } from 'yup'
 
-type Props = HTMLProps<HTMLFormElement> & {
+type Props = Omit<HTMLProps<HTMLFormElement>, 'children'> & {
   url?: string
   schema?: AnyObjectSchema
   config?: Request
