@@ -10,5 +10,5 @@ export default function useField<TValue = string>(name: string, { $default = '' 
 
   const val: TValue = value
 
-  return { ref, value: val, error: error?.message, onChange }
+  return { ref, value: val, error: error?.message, setValue: onChange }
 }
