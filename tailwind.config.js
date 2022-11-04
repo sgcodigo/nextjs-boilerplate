@@ -35,6 +35,11 @@ module.exports = {
     },
     screens: { sm: '640px', md: '768px', lg: '1024px', xl: '1440px', '2xl': '1960px' },
   },
-  plugins: [require('tailwindcss-radix')({ variantPrefix: 'rdx' })],
+  plugins: [
+    require('tailwindcss-radix')({ variantPrefix: 'rdx' }),
+    plugin(({ addVariant }) => {
+      addVariant('abled', '&:not([disabled])')
+    }),
+  ],
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './views/**/*.{js,ts,jsx,tsx}', './layouts/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 }
