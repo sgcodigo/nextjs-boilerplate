@@ -15,8 +15,7 @@ export default function Image({ src, alt = '', fill, className, ...rest }: Props
       width={9999}
       height={9999}
       quality={100}
-      className={`object-cover object-center transition-opacity ${fill && 'absolute inset-0 h-full w-full'} 
-      ${isLoaded ? 'opacity-1 blur-none' : 'opacity-0 blur-xl'} ${className}`}
+      className={`object-center transition-opacity ${fill && 'absolute inset-0 h-full w-full'} ${isLoaded ? 'opacity-1 blur-none' : 'opacity-0 blur-xl'} ${className}`}
       onLoadingComplete={() => setLoaded(true)}
     />
   );
