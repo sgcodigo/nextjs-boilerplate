@@ -12,9 +12,7 @@
 
 html {
   color-scheme: dark;
-}
-body{
-  @apply  bg-white;
+  background-color: #fff;
 }
 
 * {
