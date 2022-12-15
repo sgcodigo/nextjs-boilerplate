@@ -1,24 +1,21 @@
-import $Image, { ImageProps } from 'next/future/image';
-import { useState } from 'react';
+import { cva } from 'class-variance-authority'
+import $Image, { ImageProps } from 'next/image'
+import { useState } from 'react'
+import { ElementState } from 'types'
 
-type Props = Omit<ImageProps, 'src' | 'alt'> & { src: string; alt?: string; fill?: boolean };
+type Props = Omit<ImageProps, 'src' | 'alt'> & { src: string; alt?: string }
 
-export default function Image({ src, alt = '', fill, className, ...rest }: Props) {
-  const $src = src.includes('http') || src.includes('data:') ? src : `/images/${src}`;
-  const [isLoaded, setLoaded] = useState(false);
+const classes = cva('object-center transition duration-500', {
+  variants: { state: { error: '', loading: 'opacity-0 blur-lg scale-90', success: 'opacity-100 blur-none scale-100' } },
+})
 
-  return (
-    <$Image
-      alt={alt}
-      src={$src}
-      width={1000}
-      height={1000}
-      quality={100}
-      className={`object-center transition-all ${fill && 'absolute inset-0 h-full w-full'} ${isLoaded ? 'opacity-1 blur-none' : 'opacity-0 blur-xl'} ${className}`}
-      onLoadingComplete={() => setLoaded(true)}
-      {...rest}
-    />
-  );
+export default function Image({ src, alt = '', className, ...rest }: Props) {
+  const $src = src.includes('http') || src.includes('data:') ? src : `/images/${src}`
+  const [state, setState] = useState<Exclude<ElementState, 'disable'>>('loading')
+
+  const size = rest.fill ? undefined : { width: 1000, height: 1000 }
+
+  return <$Image alt={alt} src={$src} {...size} quality={85} className={classes({ state, className })} onLoadingComplete={() => setState('success')} {...rest} />
 }
 
 // Note: Image component prefix `/images` src for relative path. So `src="$name.png"` will fetch image under /public/images/$name.png
