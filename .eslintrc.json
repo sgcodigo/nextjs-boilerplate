@@ -1,3 +1,6 @@
 {
+  "rules": {
+    "jsx-a11y/alt-text": "off"
+  },
   "extends": "next/core-web-vitals"
 }
