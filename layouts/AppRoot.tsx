@@ -21,12 +21,8 @@ export default function AppRoot({ children }: { children: ReactNode }) {
 
   // Redirects are handled in this effect
   useEffect(() => {
-    // I forgot why used `setTimeout`, but it's necessary. If u wanna know why, remove it and u will know :3.
-    const timeout = setTimeout(() => {
-      const type = !!token ? 'guest' : 'private'
-      routes[type].forEach(path => router.pathname.includes(path) && router.replace('/'))
-    })
-    return clearTimeout(timeout)
+    const type = !!token ? 'guest' : 'private'
+    routes[type].forEach(path => router.pathname.includes(path) && router.replace('/'))
   }, [token, router.pathname])
 
   return (
