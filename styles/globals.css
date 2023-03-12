@@ -13,7 +13,3 @@
 * {
   @apply flex-shrink-0;
 }
-
-.visible-hide {
-  visibility: hidden;
-}
