@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { Fragment, ReactNode, useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
-import { tokenState } from 'states'
+import { useRecoilValue,useSetRecoilState } from 'recoil'
+import { tokenState ,isClientSideState} from 'states'
 import Footer from './Footer'
 import Header from './Header'
 
@@ -16,8 +16,14 @@ const routes = {
 
 export default function AppRoot({ children }: { children: ReactNode }) {
   const token = useRecoilValue(tokenState)
+  const setClientSide = useSetRecoilState(isClientSideState)
   const router = useRouter()
   const isBareRoute = routes.bare.find(r => r === router.asPath)
+
+  // Needed to prevent hydration error.
+  useEffect(() => {
+    setClientSide(true)
+  }, [])
 
   // Redirects are handled in this effect
   useEffect(() => {
